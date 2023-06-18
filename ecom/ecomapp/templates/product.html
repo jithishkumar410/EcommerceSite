@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+<style>
+.rop{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  
+}
+    
+    
+  
+  .lo{
+    margin: 2%;
+  }
+  @media screen and (max-width: 1080px){
+     .rop{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+     }
+  }
+  
+  
+  
+  .card:hover{
+  border:solid rgb(247, 251, 25) 1.5px;
+ 
+  
+  box-shadow: rgb(152, 146, 146) ;
+}
+  
+
+</style>
+
+<div class="catg">
+  
+  <div class="container-fluid text-center">
+    <div class="rop">
+  {% for i in pro %}
+ 
+  <div class="coll" >
+  <div class="card" style="width: 18rem; margin-bottom:2rem;">
+    
+
+    <img src="{{ i.img.url }}" class="card-img-top" alt="..." style="height: 10rem">
+
+    <div class="card-body">
+      <h5 class="card-title">{{ i.name }}</h5>
+      <p class="card-text" style="font-size:10px">{{ i.description }}</p>
+      <p class="card-text">Rs:{{ i.op }}  Rs:<s>{{ i.sp }}</s></p>
+      <p class="card-text"></p>
+      
+      <a href="{% url 'pd' i.id %}" class="btn" >CLICk HERE</a>
+    </div>
+  </div>
+  
+</div>
+
+  {% endfor %}
+</div>
+
+</div>
+</div>
+
+
+ 
+{% endblock content%}

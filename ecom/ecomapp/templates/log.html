@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+	.card{
+        margin-right: 30%;
+        margin-left: 30%;
+        margin-top: 4rem;
+        border-color:rgb(247, 251, 25) ;
+        border-radius: 10px;
+        border-width: 5px;
+		padding: 1rem;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        
+        
+
+    }
+    .in{
+        padding: 0.5rem;
+        
+    }
+    .btn{
+        margin-top: 1.5rem;
+    }
+    h1{
+        text-align: center;
+        margin: 1rem;
+    }
+    @media screen and (max-width: 480px){
+   .card{
+    margin: 3rem;
+   }
+}
+</style>
+
+
+<h1>Login page</h1>
+<div class="card">
+<form method="POST" >
+    {% csrf_token %}
+	{% for i in form %}
+    <div class="in">
+    {{ i.label }}
+</div>
+    {{ i }}
+
+
+    {% endfor %}
+	<input type="submit" value="Login" class="btn" />
+	<p>Don't have an account? <a href="{%url 'reg' %}">Register</a></p>
+</form>
+</div>
+
+    
+{% endblock content %}

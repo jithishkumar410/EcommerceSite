@@ -1,0 +1,258 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+  
+  .mhead{
+        margin: 2rem;
+        text-align: center;
+        
+        
+        
+    }
+#l{
+        border-top: solid 4px rgb(247, 251, 25);
+        color: white;
+        text-align: center;
+    }
+    img{
+      width: 200px;
+      border-radius: 7px;
+      margin-top: 2rem;
+    }  
+    .ro{
+          
+          
+      border: solid;
+      border-color: rgb(182, 182, 168);
+          border-radius: 10px;
+          border-width: 1px;
+          padding: .5%;
+          z-index: 1;
+          display: flex;
+          flex-direction: row;
+          margin: 1rem;
+          
+          margin-top: 2rem;
+          justify-content: space-between;
+  
+    }
+    .ro:hover{
+      border:solid rgb(247, 251, 25) 1.75px;
+  z-index: 3;
+  
+  box-shadow: rgb(152, 146, 146) ;
+
+    }
+  
+    @media screen and (min-width: 1080px){
+     .ro{
+      margin-top: 2rem;
+     
+      margin-left: 17rem;
+      margin-right: 12rem;
+      padding: 1rem;
+      
+      
+     
+     
+     }
+     
+     .col2{
+      margin-left: 5rem;
+     }
+     img{
+      width: 200px;
+      height: 250px;
+     }
+     .btn{
+      width: 40%;
+     }
+    }
+  
+    @media screen and (max-width: 480px){
+     .ro{
+      flex-direction:column;
+      margin-top: 2rem;
+     }
+     img{
+      width: 325px;
+      height: 250px;
+      margin-left: 2rem;
+      
+     }
+     .col2{
+      text-align: center;
+  
+      margin: .75rem;
+     }
+     .cd{
+      margin-top: 1rem;
+     }
+  }
+    .col2{
+      display: flex;
+      flex-direction:column;
+      text-align: start;
+      flex: 1;
+     
+    }
+    .ct{
+     
+      margin: 2rem;
+    }
+    .price{
+     
+      margin-left: 2rem;
+     
+      display: flex;
+      flex-direction: column;
+     
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      
+      
+      
+    }
+    
+    
+    .cm{
+     
+      padding: 2%;
+      border-radius:2px ;
+      font-weight: bolder;
+      
+      
+    }
+    .co{
+     
+      padding: 2%;
+      border-radius:2px ;
+      font-weight: bolder;
+    }
+    .ft{
+      position: fixed;
+      bottom: -1%;
+      display: flex;
+      justify-content: space-around;
+      z-index: 2;
+      background-color: rgb(247, 251, 25);
+      width: 100vw;
+      padding: 0.5rem;
+      border-radius: 10px;
+      
+      
+    }
+    .counter{
+      display: flex;
+     margin-left: 0.75rem;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      margin-left: 2rem;
+
+    }
+    #ibtn,#dbtn{
+      background-color: rgb(247, 251, 25); 
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border-radius: 5px;
+
+    }
+    #ibtn:hover,#dbtn:hover{
+      background-color: rgb(0, 0, 0); 
+      color:rgb(247, 251, 25) ;
+
+    }
+   
+</style>
+<div class="mhead">
+<h1 class="t">My cart</h1>
+
+<span id="l">...................................................................</span>
+</div>
+ {% for i in pro %}
+
+
+<div class="con " id="pd">
+    <div class="ro">
+  
+      <div  id="img">
+        <img src="{{i.product.img.url}}" alt="..." >
+      </div>
+      <div class="col2">
+        
+         
+          <div class="ct">
+              <h5>{{ i.product.name }}</h5>
+            
+           
+              <h6 class="cde">{{ i.product.description }}</h6>
+            </div>
+            <div class="counter">
+              <h6>Quantity:</h6>
+              <div id="ibtn">+</div>
+              <div id="counter-value">1</div>
+              <div id="dbtn">-</div>
+              
+              
+          </div>
+              <div class="cd">
+                
+              <div class="price">
+                <h7 class="co">Offer price:    RS {{i.product.op }}</h7>
+              <h7 class="cm">MRP:    RS <s>{{ i.product.sp }}</s></h7>
+             
+             
+              <a href="{% url 'delcart' i.product_id %}" class="btn" >Delete</a>
+             
+            </div>
+             
+            </div>
+          </div>
+       
+        </div>
+    
+  </div>
+
+  {% endfor %}
+  
+    
+ 
+  
+<h1 class="ft"><span class="ta">Total Amount:</span>Rs:{{t}}</h1>
+<script>
+   
+  let counter = 1;
+    
+    const counterValue = document.getElementById('counter-value');
+    const incrementBtn = document.getElementById('ibtn');
+    const decrementBtn = document.getElementById('dbtn');
+    var qty=document.getElementsByClassName('qt')
+    
+      
+   
+    incrementBtn.addEventListener('click', () => {
+     
+        counter++
+      
+        counterValue.innerHTML = counter;
+      
+        qty.value=counter
+        
+        
+        
+    });
+      
+    // To decrement the value of counter
+    decrementBtn.addEventListener('click', () => {
+      if (counter>1){
+        counter--
+      
+        counterValue.innerHTML = counter;
+      }
+        qty.value=counter
+        document.getElementsByClassName('qt').value=counter
+    });
+
+    
+    </script>
+{% endblock content %}

@@ -1,0 +1,276 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+  
+
+  img{
+    width: 325px;
+    border-radius: 7px;
+  }  
+  .ro{
+        
+        
+    border: solid;
+    border-color: rgb(182, 182, 168);
+        border-radius: 10px;
+        border-width: 1px;
+        padding: .5%;
+        z-index: 1;
+        display: flex;
+        flex-direction: row;
+        margin: 1rem;
+        padding: 2rem;
+        margin-top: 2rem;
+        justify-content: space-between;
+
+  }
+  
+  @media screen and (min-width: 1080px){
+   .ro{
+    margin: 5rem;
+    margin-left: 17rem;
+    margin-right: 12rem;
+    padding: 3rem;
+    
+    
+   
+   
+   }
+   .col2{
+    margin-left: 5rem;
+   }
+   img{
+    width: 400px;
+    height: 450px;
+   }
+   .btn{
+    width: 40%;
+   }
+  }
+
+  @media screen and (max-width: 480px){
+   .ro{
+    flex-direction:column;
+    margin-top: 2rem;
+   }
+   img{
+    width: 325px;
+    height: 270px;
+    
+    
+   }
+   .col2{
+    text-align: center;
+
+    margin: .75rem;
+   }
+   .cd{
+    margin-top: 1rem;
+   }
+}
+  .col2{
+    display: flex;
+    flex-direction:column;
+    text-align: start;
+    flex: 1;
+   
+  }
+  .ct{
+   
+    margin: 2rem;
+  }
+  .price{
+    flex: 1;
+    margin-left: 2rem;
+   
+    display: flex;
+    flex-direction: column;
+   
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    
+    
+    
+  }
+  .ros{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  
+  .cm{
+    
+    padding: 2%;
+    border-radius:2px ;
+    font-weight: bolder;
+    
+    
+  }
+  .co{
+   
+    padding: 2%;
+    border-radius:2px ;
+    font-weight: bolder;
+  }
+  .c{
+    text-align: center;
+    margin-bottom: 1.5rem;
+    
+  }
+  .btn{
+    padding: 0.5rem;
+    width: 85%;
+  }
+.cde{
+  margin-top: 0.75rem;
+}
+   
+.mhead{
+        margin: 2%;
+        margin-top: 5%;
+        text-align: center;
+        
+        
+        
+    }
+   
+    #l{
+        border-top: solid 4px rgb(247, 251, 25);
+        color: white;
+    }
+    
+   
+   
+  
+   #l{
+       border-top: solid 4px rgb(247, 251, 25);
+       color: white;
+   }
+   
+   
+
+.lo{
+  margin: 2%;
+}
+@media screen and (max-width: 480px){
+   .row{
+    display: flex;
+    justify-content: center;
+   
+   }
+   .col2{
+    padding: 0rem;
+   }
+   .cols{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   }
+   .ct{
+     
+    margin-left: 0.1 rem;
+   }
+}
+
+
+ 
+
+    
+   
+   
+
+
+
+
+
+
+
+  </style>
+
+
+
+
+{% for i in pro %}
+
+
+<div class="con " id="pd">
+  <div class="ro">
+    
+    <div  id="img">
+      <img src="{{ i.img.url }}" alt="..." >
+    </div>
+    <div class="col2">
+      
+       
+        <div class="ct">
+            <h1>{{ i.name }}</h1>
+          <h6 class="cde">{{ i.description }}</h6>
+          
+          </div>
+         
+       
+            <div class="cd">
+            <div class="price">
+              <h4 class="co">Offer price:    RS {{ i.op }}</h4>
+            <h4 class="cm">MRP:    RS <s>{{ i.sp }}</s></h4>
+           
+          </div>
+            <div class="c">
+            <a href="{% url 'cart' i.id  %}" class="btn" id="c">add to cart</a>
+          </div>
+          </div>
+        </div>
+     
+      </div>
+  
+</div>
+
+  
+
+{% endfor %}
+
+<div class="lo">
+  <div id="catag">
+    <div class="mhead">
+        <h1 id="h1" >similar Products</h1>
+        <span id="l">...................................................................</span>
+        
+    </div>
+  <div class="trending">
+    <div class="catg">
+  
+      <div class="container text-center">
+        <div class="ros">
+          {% for i in otpro %}
+          
+          
+      <div class="cols" >
+      <div class="card" style="width: 15rem; border:solid rgb(247, 251, 25); margin-bottom:2rem;">
+        
+    
+        <img src="{{ i.img.url }}" class="card-img-top" alt="..." style="height: 10rem">
+    
+        <div class="card-body">
+          <h5 class="card-title">{{ i.name }}</h5>
+
+          <p class="card-text">Rs:{{ i.op }} Rs:<s>{{ i.sp }}</s></p>
+          
+          <a href="{% url 'pd' i.id %}" class="btn" >Click Here</a>
+        </div>
+      </div>
+      
+    </div>
+   
+      {% endfor %}
+      
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
